@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                          /* Versión de JS moderna */
+    "module": "NodeNext",                        /* Compatible con Node 20 */
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",                          /* Donde escribes el código */
+    "outDir": "./dist",                         /* Donde se guarda el código compilado */
+    "esModuleInterop": true,                     /* Compatibilidad con librerías antiguas */
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                              /* Tipado fuerte */
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

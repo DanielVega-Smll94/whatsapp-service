@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  whatsapp-service:
+    build: .
+    container_name: whatsapp-service
+    restart: always
+    #ports:
+    #  - "3000:3000"
+    volumes:
+      - ./sessions:/app/sessions # Monta el volumen para persistir las sesiones
+    environment:
+      - PORT=3000
+      - API_KEY=fc1fbe1c-f3d2-488b-92c4-5227c60dec9d
+      - WEBHOOK_URL=https://tu-n8n.com/webhook/api-test
+      - NODE_ENV=production
+    networks:
+      - dvegab_network
+
+networks:
+  dvegab_network:
+    external: true
