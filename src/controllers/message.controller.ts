@@ -3,24 +3,11 @@ import { WhatsAppService } from '../services/whatsapp.service';
 export class MessageController {
     private waService = WhatsAppService.getInstance();
 
-    public sendMessage_old = async (req: { body: { number: any; message: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: any; status?: string; }): any; new(): any; }; }; }) => {
-        try {
-            const { number, message } = req.body;
-            if (!number || !message) {
-                return res.status(400).json({ error: 'Faltan datos' });
-            }
-            await this.waService.sendTextMessage(number, message);
-            return res.status(200).json({ status: 'success' });
-        } catch (error: any) {
-            return res.status(500).json({ error: error.message });
-        }
-    }
-
     public sendMessage = async (req: any, res: any) => {
         try {
             const { number, message, mediaUrl, fileName } = req.body;
 
-            if (!number) return res.status(400).json({ error: 'Número es requerido.' });
+            if (!number) return res.status(400).json({ error: 'Número es requerido.', success: false });
 
             // Si viene mediaUrl, enviamos como documento (PDF, etc.)
             if (mediaUrl) {
@@ -30,9 +17,9 @@ export class MessageController {
                 await this.waService.sendTextMessage(number, message);
             }
 
-            return res.status(200).json({ status: 'success' });
+            return res.status(200).json({ status: 'success', success: true, message: 'Mensaje enviado correctamente.' });
         } catch (error: any) {
-            return res.status(500).json({ error: 'Error interno', details: error.message });
+            return res.status(500).json({ error: 'Error interno', details: error.message, success: false });
         }
     }
 
